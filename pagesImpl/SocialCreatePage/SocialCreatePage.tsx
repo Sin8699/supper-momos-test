@@ -1,8 +1,7 @@
-import type { NextPage } from "next";
 import Head from "next/head";
-import styles from "./index.module.scss";
+import styles from "./SocialCreatePage.module.scss";
 
-const Home: NextPage = () => {
+export const SocialCreatePage = () => {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center py-2">
       <Head>
@@ -376,4 +375,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default SocialCreatePage;
