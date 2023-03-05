@@ -1,0 +1,93 @@
+.header {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 80px;
+  flex-direction: column;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.screenShot20220509At929 {
+  position: relative;
+  width: 200px;
+  height: 35.56px;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+
+.navigation {
+  flex-direction: row;
+  gap: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.button,
+.buttonBase {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.button {
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.buttonBase3 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-sm);
+}
+
+.text {
+  position: relative;
+  line-height: 24px;
+  font-weight: 500;
+}
+
+.main {
+  // Layout Self
+  flex-grow: 1;
+  width: 100%;
+  margin: auto;
+  padding-bottom: 64px;
+
+  // Layout Children
+  display: flex;
+  flex-direction: column;
+}
+
+.root {
+  max-width: 1344px;
+  // Layout Self
+  width: 100%;
+  min-height: 100vh;
+
+  // Layout Children
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  margin: auto;
+  padding: 0 32px;
+}
+
+.wrapper {
+  background: linear-gradient(138.11deg, #fef452, #942f70);
+}

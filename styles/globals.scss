@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+// Importing external CSS code, fonts, etc.
+@import url("https://fonts.googleapis.com/css2?family=Proxima+Nova:wght@600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap");
+// @import url("https://fonts.googleapis.com/css2?family=Neue+Haas+Grotesk+Display+Pro:wght@400&display=swap");
+
+body {
+  margin: 0;
+  line-height: normal;
+}
+
+:root {
+  /* fonts */
+  --text-sm-regular: Inter;
+  --font-neue-haas-grotesk-display-pro: "Neue Haas Grotesk Display Pro";
+  --font-proxima-nova: "Proxima Nova";
+
+  /* font sizes */
+  --text-sm-regular-size: 14px;
+  --text-md-medium1-size: 16px;
+  --font-size-lg: 28px;
+
+  /* Colors */
+  --white: #fff;
+  --yellow1: #fef452;
+  --purple1: #942f70;
+  --gray-100: #f2f4f7;
+  --gray-6: #f2f2f2;
+  --gray-600: #475467;
+  --gray-7001: #344054;
+  --gray-1: #333;
+  --primary-50: #f9f5ff;
+  --gray-300: #d0d5dd;
+  --gray-5001: #667085;
+  --dark-blue: #14597a;
+
+  /* Gaps */
+  --gap-2xs: 2px;
+  --gap-xs: 6px;
+  --gap-sm: 8px;
+  --gap-md: 12px;
+  --gap-lg: 16px;
+  --gap-xl: 24px;
+  --gap-2xl: 32px;
+
+  /* Paddings */
+  --padding-2xs: 2px;
+  --padding-xs: 3px;
+  --padding-sm: 4px;
+  --padding-md: 10px;
+  --padding-lg: 12px;
+  --padding-xl: 32px;
+
+  /* border radiuses */
+  --br-2xs: 4px;
+  --br-xs: 8px;
+  --br-sm: 10px;
+  --br-md: 12px;
+  --br-lg: 16px;
+  --br-xl: 64px;
+
+  /* Effects */
+  --shadow-xs1: 0px 1px 2px rgba(16, 24, 40, 0.05);
+}
