@@ -20,7 +20,7 @@ function useOnClickOutside<T extends HTMLElement | null>(ref: React.MutableRefOb
         if (
           !ref ||
           !ref.current ||
-          (event.target instanceof Node && ref.current.contains(event.target))
+          (event.target instanceof Node && ref.current?.contains(event.target))
         ) {
           return;
         }

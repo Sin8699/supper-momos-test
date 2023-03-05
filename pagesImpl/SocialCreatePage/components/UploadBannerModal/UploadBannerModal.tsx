@@ -65,12 +65,12 @@ export default function UploadBannerModal(props: UploadBannerModalProps) {
                   <span className={classNames(s.title, "font-bold text-xl")}>
                     Choose a banner
                   </span>
-                  <XMarkIcon className="h-6 w-6" />
+                  <XMarkIcon className="h-6 w-6" onClick={closeModal} />
                 </div>
                 <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4 flex flex-wrap gap-3 h-[457px]">
                   {BANNER_URLS.map((banner) => {
                     return (
-                      <img width={150} key={banner} src={banner} alt={banner}/>
+                      <img width={150} key={banner} src={banner} alt={banner} />
                     );
                   })}
                 </div>

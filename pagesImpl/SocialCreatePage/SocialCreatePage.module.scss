@@ -97,11 +97,14 @@
   background-color: var(--purple1);
   flex-direction: row;
   padding: var(--padding-sm) var(--padding-lg);
-  line-height: 60px;
+  display: inline;
+  // line-height: 60px;
 }
 .frameWrapper {
   flex-direction: column;
   color: var(--white);
+  font: 48px/67px var(--font-neue-haas-grotesk-display-pro);
+  display: unset;
 }
 .mediaIconfilledcalendar {
   position: relative;
@@ -217,7 +220,8 @@
   font-size: var(--text-md-medium1-size);
 }
 .frameParent {
-  height: 386px;
+  min-height: 386px;
+  max-width: 586px;
   flex-shrink: 0;
   gap: var(--gap-xl);
   font-size: 48px;
@@ -451,51 +455,9 @@
   flex-shrink: 0;
   overflow: hidden;
 }
-.badge {
-  border-radius: var(--br-lg);
-  background-color: var(--primary-50);
-  padding: var(--padding-sm) var(--padding-md) var(--padding-sm) var(--padding-lg);
-  align-items: center;
-  gap: 4px;
-  mix-blend-mode: multiply;
-}
-.badge,
-.badge1,
-.badgeParent {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-}
-.badge1 {
-  border-radius: var(--br-lg);
-  background-color: var(--gray-100);
-  padding: var(--padding-2xs) var(--padding-md);
-  align-items: center;
-  mix-blend-mode: multiply;
-}
-.badgeParent {
-  align-items: flex-start;
-  gap: var(--gap-sm);
-  color: var(--gray-7001);
-}
-.form,
-.formFields {
-  align-self: stretch;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-.formFields {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--gap-lg);
-}
-.form {
-  text-align: center;
-  color: var(--purple1);
-}
+
 .container2,
 .content2,
-.form,
 .section2 {
   display: flex;
   align-items: flex-start;
@@ -540,7 +502,6 @@
   border: 1px solid var(--yellow1);
   box-sizing: border-box;
   width: 640px;
-  overflow: hidden;
   display: flex;
   flex-direction: row;
   padding: var(--padding-lg) 20px;

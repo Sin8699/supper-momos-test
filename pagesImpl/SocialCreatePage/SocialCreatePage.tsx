@@ -10,6 +10,9 @@ import CurrencyDollarIcon from "@heroicons/react/24/solid/CurrencyDollarIcon";
 import classNames from "classnames";
 import { InputText } from "../../components/editor/InputText/InputText";
 import UploadBannerModal from "./components/UploadBannerModal/UploadBannerModal";
+import { InputDateTime } from "../../components/editor/InputDateTime/InputDateTime";
+import { InputTime } from "../../components/editor/InputDateTime/InputTime";
+import PickTagSocial from "./components/PickTagSocial/PickTagSocial";
 
 export const SocialCreatePage = () => {
   const [openBannerModal, setOpenBannerModal] = useState(false);
@@ -64,11 +67,14 @@ export const SocialCreatePage = () => {
                                   )}
                                 />
 
-                                <InputText
-                                  className={styles.headingContainer}
+                                <InputDateTime
+                                  className={classNames(
+                                    "w-[181px]",
+                                    styles.headingContainer
+                                  )}
                                   defaultText="Date"
                                   name="tate"
-                                ></InputText>
+                                ></InputDateTime>
                               </div>
                               <div
                                 className={styles.mediaIconfilledclockParent}
@@ -80,11 +86,14 @@ export const SocialCreatePage = () => {
                                   )}
                                 />
 
-                                <InputText
-                                  className={styles.headingContainer}
+                                <InputTime
+                                  className={classNames(
+                                    "max-w-[181px]",
+                                    styles.headingContainer
+                                  )}
                                   defaultText="Time"
                                   name="time"
-                                ></InputText>
+                                ></InputTime>
                               </div>
                             </div>
                             <div className={styles.frameDiv}>
@@ -307,37 +316,9 @@ export const SocialCreatePage = () => {
                                       </div>
                                     </div>
                                   </div>
-                                  <div className={styles.form}>
-                                    <div className={styles.formFields}>
-                                      <div className={styles.badge}>
-                                        <div className={styles.label}>
-                                          Engineering
-                                        </div>
-                                        <img
-                                          className={styles.xCloseIcon}
-                                          alt=""
-                                          src="../xclose.svg"
-                                        />
-                                      </div>
-                                      <div className={styles.badgeParent}>
-                                        <div className={styles.badge1}>
-                                          <div
-                                            className={styles.label}
-                                          >{`Product `}</div>
-                                        </div>
-                                        <div className={styles.badge1}>
-                                          <div className={styles.label}>
-                                            Marketing
-                                          </div>
-                                        </div>
-                                        <div className={styles.badge1}>
-                                          <div className={styles.label}>
-                                            Design
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
+                                  
+                                  <PickTagSocial />
+                                  
                                 </div>
                               </div>
                             </div>
