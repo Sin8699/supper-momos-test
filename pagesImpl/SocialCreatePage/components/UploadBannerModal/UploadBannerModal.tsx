@@ -18,13 +18,13 @@ import s from "./UploadBannerModal.module.scss";
 interface UploadBannerModalProps {
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
-  onChange?: Dispatch<SetStateAction<string>>;
+  onChange?: Dispatch<SetStateAction<string | undefined>>;
 }
 
 export default function UploadBannerModal(props: UploadBannerModalProps) {
   const { open, setOpen, onChange } = props;
   const [selected, setSelected] = useState<string>();
-  console.log('selected', selected)
+  console.log("selected", selected);
 
   const cancelButtonRef = useRef(null);
 

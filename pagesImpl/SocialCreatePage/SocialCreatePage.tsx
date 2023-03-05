@@ -14,28 +14,39 @@ import { InputDateTime } from "../../components/editor/InputDateTime/InputDateTi
 import { InputTime } from "../../components/editor/InputDateTime/InputTime";
 import PickTagSocial from "./components/PickTagSocial/PickTagSocial";
 import { InputArea } from "../../components/editor/InputArea/InputArea";
+import { useForm } from "react-hook-form";
+import { DEFAULT_SOCIAL_TAGS, SOCIAL_FIELDS } from "./constants";
 
 export const SocialCreatePage = () => {
   const [openBannerModal, setOpenBannerModal] = useState(false);
   const [bannerURL, setBannerURL] = useState<string>();
+  const [tags, setTags] = useState([DEFAULT_SOCIAL_TAGS[0]]);
 
   const openModal = useCallback(() => {
     setOpenBannerModal(true);
   }, []);
 
+    const {
+      register,
+      formState: { errors },
+      handleSubmit,
+    } = useForm();
+    const onSubmit = (data:any) => console.log(data);
+    console.log('errors', errors)
+
   return (
     <>
       <div className={styles.createSocialParent}>
-        <div className={styles.createSocial}>
-          <div className={styles.imageParent} onClick={openModal}>
-            <div className={styles.image}>
+        <form onSubmit={handleSubmit(onSubmit)} className={styles.createSocial}>
+          <div className={styles.imageParent}>
+            <div className={styles.image} onClick={openModal}>
               <div className={styles.fiSrPicture1Parent}>
                 <CloudArrowUpIcon className="h-6 w-6 " />
 
                 <div className={styles.addABanner}>Add a banner</div>
               </div>
             </div>
-            <img src={bannerURL} className={styles.image} />
+            <img src={bannerURL} className={styles.image} onClick={openModal} />
 
             <div className={styles.heroHeaderSection}>
               <div className={styles.section}>
@@ -49,7 +60,16 @@ export const SocialCreatePage = () => {
                               <InputText
                                 className={styles.headingWrapper}
                                 defaultText="Untitle Event"
-                                name="title"
+                                // name={SOCIAL_FIELDS.TITLE}
+                                {...register(SOCIAL_FIELDS.TITLE, {
+                                  required: "Title is required",
+                                })}
+                                aria-invalid={
+                                  errors?.[SOCIAL_FIELDS.TITLE]
+                                    ? "true"
+                                    : "false"
+                                }
+                                errors={errors?.title?.message as string}
                               ></InputText>
                             </div>
                             <div className={styles.frameGroup}>
@@ -69,7 +89,7 @@ export const SocialCreatePage = () => {
                                     styles.headingContainer
                                   )}
                                   defaultText="Date"
-                                  name="tate"
+                                  name={SOCIAL_FIELDS.DATE_START_AT}
                                 ></InputDateTime>
                               </div>
                               <div
@@ -88,7 +108,7 @@ export const SocialCreatePage = () => {
                                     styles.headingContainer
                                   )}
                                   defaultText="Time"
-                                  name="time"
+                                  name={SOCIAL_FIELDS.TIME_START_AT}
                                 ></InputTime>
                               </div>
                             </div>
@@ -108,7 +128,7 @@ export const SocialCreatePage = () => {
                                 </div>
                                 <div className={styles.imageWrapper}>
                                   <InputText
-                                    name="venue"
+                                    name={SOCIAL_FIELDS.VENUE}
                                     defaultText="Venue"
                                     className={styles.headingWrapper1}
                                   />
@@ -128,7 +148,7 @@ export const SocialCreatePage = () => {
                                   />
 
                                   <InputText
-                                    name="capacity"
+                                    name={SOCIAL_FIELDS.CAPACITY}
                                     defaultText="Max capacity"
                                     className={styles.headingWrapper2}
                                   />
@@ -145,7 +165,7 @@ export const SocialCreatePage = () => {
                                     )}
                                   />
                                   <InputText
-                                    name="cost"
+                                    name={SOCIAL_FIELDS.PRICE}
                                     defaultText="Cost per person"
                                     className={styles.headingWrapper2}
                                   />
@@ -159,7 +179,7 @@ export const SocialCreatePage = () => {
                               <InputArea
                                 className={styles.input}
                                 defaultText="Description of your event.."
-                                name="description"
+                                name={SOCIAL_FIELDS.DESCRIPTION}
                               />
                             </div>
                             <div className={styles.hintText}>
@@ -185,6 +205,7 @@ export const SocialCreatePage = () => {
                                           styles.checkboxBase,
                                           "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:bg-gray-700"
                                         )}
+                                        name={SOCIAL_FIELDS.IS_MANUAL_APPROVE}
                                       />
                                       <div className={styles.label}>
                                         I want to approve attendees
@@ -196,13 +217,6 @@ export const SocialCreatePage = () => {
                                   </div>
                                   <div className={styles.toggleParent}>
                                     <div className={styles.toggle}>
-                                      <div className={styles.toggleBase}>
-                                        <img
-                                          className={styles.buttonIcon}
-                                          alt=""
-                                          src="../button.svg"
-                                        />
-                                      </div>
                                       <div
                                         className={styles.textAndSupportingText}
                                       >
@@ -219,7 +233,7 @@ export const SocialCreatePage = () => {
                                         <div className={styles.input1}>
                                           <input
                                             id="helper-radio-4"
-                                            name="helper-radio"
+                                            name={SOCIAL_FIELDS.PRIVACY}
                                             type="radio"
                                             value=""
                                             className={classNames(
@@ -244,7 +258,7 @@ export const SocialCreatePage = () => {
                                         <div className={styles.input1}>
                                           <input
                                             id="helper-radio-4"
-                                            name="helper-radio"
+                                            name={SOCIAL_FIELDS.PRIVACY}
                                             type="radio"
                                             value=""
                                             className={classNames(
@@ -269,7 +283,7 @@ export const SocialCreatePage = () => {
                                         <div className={styles.input1}>
                                           <input
                                             id="helper-radio-4"
-                                            name="helper-radio"
+                                            name={SOCIAL_FIELDS.PRIVACY}
                                             type="radio"
                                             value=""
                                             className={classNames(
@@ -293,13 +307,6 @@ export const SocialCreatePage = () => {
                                     </div>
                                   </div>
                                   <div className={styles.toggle1}>
-                                    <div className={styles.toggleBase}>
-                                      <img
-                                        className={styles.buttonIcon}
-                                        alt=""
-                                        src="../button1.svg"
-                                      />
-                                    </div>
                                     <div
                                       className={styles.textAndSupportingText}
                                     >
@@ -313,14 +320,17 @@ export const SocialCreatePage = () => {
                                     </div>
                                   </div>
 
-                                  <PickTagSocial />
+                                  <PickTagSocial
+                                    tags={tags}
+                                    setTags={setTags}
+                                  />
                                 </div>
                               </div>
                             </div>
                           </div>
-                          <div className={styles.buttonBase5}>
+                          <button type="submit" className={styles.buttonBase5}>
                             <div className={styles.text}>CREATE SOCIAL</div>
-                          </div>
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -329,7 +339,7 @@ export const SocialCreatePage = () => {
               </div>
             </div>
           </div>
-        </div>
+        </form>
       </div>
       <UploadBannerModal
         open={openBannerModal}

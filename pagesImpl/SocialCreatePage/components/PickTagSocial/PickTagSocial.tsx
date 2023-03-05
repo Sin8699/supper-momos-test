@@ -16,11 +16,13 @@ import { XMarkIcon } from "@heroicons/react/20/solid";
 import s from "./PickTagSocial.module.scss";
 
 interface PickTagSocialProps extends ComponentProps<"input"> {
+  tags: string[];
+  setTags: Dispatch<SetStateAction<string[]>>;
 }
 
 export default function PickTagSocial(props: PickTagSocialProps) {
 
-  const [tags, setTags] = useState([...DEFAULT_SOCIAL_TAGS]);
+  const { tags, setTags } = props;
 
   const clearTag = (tag: string) => () => {
     setTags((prev) => prev.filter((t) => t !== tag));

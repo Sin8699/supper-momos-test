@@ -16,4 +16,23 @@ export const BANNER_URLS = [
   "https://supermomos-app-resources-us.s3.amazonaws.com/Images/SocialBanner/banner_15.jpg",
 ];
 
-export const DEFAULT_SOCIAL_TAGS = ["Engineering", "Product", "Marketing", "Design"];
+export const DEFAULT_SOCIAL_TAGS = [
+  "Engineering",
+  "Product",
+  "Marketing",
+  "Design",
+];
+
+export const SOCIAL_FIELDS = {
+  TITLE: "title",
+  DATE_START_AT: "startAt",
+  TIME_START_AT: "time",
+  VENUE: "venue",
+  CAPACITY: "capacity",
+  PRICE: "price",
+  DESCRIPTION: "description",
+  IS_MANUAL_APPROVE: "isManualApprove",
+  PRIVACY: "privacy",
+  BANNER: "banner",
+  TAGS: "tags",
+};
