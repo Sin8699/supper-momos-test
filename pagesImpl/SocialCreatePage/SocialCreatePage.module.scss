@@ -86,7 +86,6 @@
 }
 .heading {
   position: relative;
-  line-height: 60px;
 }
 .frameWrapper,
 .headingWrapper {
@@ -98,6 +97,7 @@
   background-color: var(--purple1);
   flex-direction: row;
   padding: var(--padding-sm) var(--padding-lg);
+  line-height: 60px;
 }
 .frameWrapper {
   flex-direction: column;
@@ -110,10 +110,7 @@
   flex-shrink: 0;
   overflow: hidden;
 }
-.heading1 {
-  position: relative;
-  line-height: 40px;
-}
+
 .headingContainer {
   flex: 1;
   border-radius: var(--br-xs);
@@ -123,6 +120,7 @@
   padding: 0 var(--padding-xs);
   align-items: flex-start;
   justify-content: flex-start;
+  line-height: 40px;
 }
 .mediaIconfilledcalendarParent {
   width: 237px;
@@ -171,6 +169,7 @@
   padding: 0 var(--padding-lg);
   box-sizing: border-box;
   align-items: flex-start;
+  line-height: 40px;
 }
 .frameParent1 {
   align-items: flex-start;
@@ -191,6 +190,7 @@
   padding: 0 var(--padding-lg);
   box-sizing: border-box;
   align-items: flex-start;
+  line-height: 40px;
 }
 .mediaIconfilleduserGroupParent {
   align-items: center;
@@ -658,4 +658,8 @@
   font-size: 20px;
   color: var(--dark-blue);
   font-family: var(--font-proxima-nova);
+}
+
+.iconForm {
+  color: var(--dark-blue);
 }

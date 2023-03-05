@@ -1,0 +1,12 @@
+.title {
+  color: var(--gray-7001);
+}
+
+.saveBtn {
+  color: var(--purple1);
+  background-color: var(--yellow1);
+
+  &:hover {
+    opacity: 0.7;
+  }
+}

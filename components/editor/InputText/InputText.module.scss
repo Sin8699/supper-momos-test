@@ -1,0 +1,13 @@
+.headingWrapper2 {
+  border-radius: var(--br-2xs);
+  background-color: var(--white);
+  width: 155px;
+  flex-shrink: 0;
+  padding: 0 var(--padding-lg);
+  box-sizing: border-box;
+  align-items: flex-start;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  line-height: 40px;
+}
