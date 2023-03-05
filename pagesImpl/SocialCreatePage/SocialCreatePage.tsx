@@ -13,9 +13,11 @@ import UploadBannerModal from "./components/UploadBannerModal/UploadBannerModal"
 import { InputDateTime } from "../../components/editor/InputDateTime/InputDateTime";
 import { InputTime } from "../../components/editor/InputDateTime/InputTime";
 import PickTagSocial from "./components/PickTagSocial/PickTagSocial";
+import { InputArea } from "../../components/editor/InputArea/InputArea";
 
 export const SocialCreatePage = () => {
   const [openBannerModal, setOpenBannerModal] = useState(false);
+  const [bannerURL, setBannerURL] = useState<string>();
 
   const openModal = useCallback(() => {
     setOpenBannerModal(true);
@@ -25,23 +27,17 @@ export const SocialCreatePage = () => {
     <>
       <div className={styles.createSocialParent}>
         <div className={styles.createSocial}>
-          <div className={styles.imageParent}>
-            <div className={styles.image} onClick={openModal}>
-              <div className={styles.image6} />
+          <div className={styles.imageParent} onClick={openModal}>
+            <div className={styles.image}>
               <div className={styles.fiSrPicture1Parent}>
                 <CloudArrowUpIcon className="h-6 w-6 " />
 
                 <div className={styles.addABanner}>Add a banner</div>
               </div>
             </div>
+            <img src={bannerURL} className={styles.image} />
+
             <div className={styles.heroHeaderSection}>
-              <div className={styles.dropdownHeaderNavigation}>
-                <img
-                  className={styles.dividerIcon}
-                  alt=""
-                  src="../divider.svg"
-                />
-              </div>
               <div className={styles.section}>
                 <div className={styles.section1}>
                   <div className={styles.container1}>
@@ -160,11 +156,11 @@ export const SocialCreatePage = () => {
                           <div className={styles.textareaInputField}>
                             <div className={styles.inputWithLabel}>
                               <div className={styles.label}>Description</div>
-                              <div className={styles.input}>
-                                <div className={styles.text5}>
-                                  Description of your event..
-                                </div>
-                              </div>
+                              <InputArea
+                                className={styles.input}
+                                defaultText="Description of your event.."
+                                name="description"
+                              />
                             </div>
                             <div className={styles.hintText}>
                               This is a hint text to help user.
@@ -316,9 +312,8 @@ export const SocialCreatePage = () => {
                                       </div>
                                     </div>
                                   </div>
-                                  
+
                                   <PickTagSocial />
-                                  
                                 </div>
                               </div>
                             </div>
@@ -336,7 +331,11 @@ export const SocialCreatePage = () => {
           </div>
         </div>
       </div>
-      <UploadBannerModal open={openBannerModal} setOpen={setOpenBannerModal} />
+      <UploadBannerModal
+        open={openBannerModal}
+        setOpen={setOpenBannerModal}
+        onChange={setBannerURL}
+      />
     </>
   );
 };

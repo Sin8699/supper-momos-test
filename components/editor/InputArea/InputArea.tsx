@@ -2,19 +2,19 @@ import classNames from "classnames";
 import { ComponentProps, PropsWithChildren, useRef, useState } from "react";
 import useOnClickOutside from "../../../hooks/useOnClickOutside";
 
-import s from "./InputText.module.scss";
+import s from "./InputArea.module.scss";
 
-interface InputTextProps extends ComponentProps<"input"> {
+interface InputAreaProps extends ComponentProps<"textarea"> {
   onlyView?: JSX.Element;
   defaultText: string;
   className?: string;
 }
 
-export function InputText({
+export function InputArea({
   onlyView,
   defaultText,
   className,
-}: PropsWithChildren<InputTextProps>): JSX.Element {
+}: PropsWithChildren<InputAreaProps>): JSX.Element {
   const [editing, setEditing] = useState<boolean>(false);
   const [value, setValue] = useState<string>();
 
@@ -31,7 +31,7 @@ export function InputText({
   return (
     <>
       {editing ? (
-        <input
+        <textarea
           className={classNames(className)}
           value={value}
           autoFocus

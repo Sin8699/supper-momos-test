@@ -15,19 +15,28 @@ import { XMarkIcon } from "@heroicons/react/24/solid";
 
 import s from "./UploadBannerModal.module.scss";
 
-interface UploadBannerModalProps extends ComponentProps<"input"> {
+interface UploadBannerModalProps {
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
+  onChange?: Dispatch<SetStateAction<string>>;
 }
 
 export default function UploadBannerModal(props: UploadBannerModalProps) {
-  const { open, setOpen } = props;
+  const { open, setOpen, onChange } = props;
+  const [selected, setSelected] = useState<string>();
+  console.log('selected', selected)
 
   const cancelButtonRef = useRef(null);
 
   const closeModal = useCallback(() => {
     setOpen(false);
   }, []);
+
+  const handleSave = () => {
+    if (selected) onChange?.(selected);
+
+    closeModal();
+  };
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -70,7 +79,15 @@ export default function UploadBannerModal(props: UploadBannerModalProps) {
                 <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4 flex flex-wrap gap-3 h-[457px]">
                   {BANNER_URLS.map((banner) => {
                     return (
-                      <img width={150} key={banner} src={banner} alt={banner} />
+                      <div
+                        className={
+                          selected === banner ? "ring-offset-1 ring-2" : ""
+                        }
+                        key={banner}
+                        onClick={() => setSelected(banner)}
+                      >
+                        <img width={150} src={banner} alt={banner} />
+                      </div>
                     );
                   })}
                 </div>
@@ -81,7 +98,7 @@ export default function UploadBannerModal(props: UploadBannerModalProps) {
                       "inline-flex w-full justify-center rounded-md px-3 py-2 text-sm font-semibold text-white shadow-sm sm:ml-3 sm:w-auto",
                       s.saveBtn
                     )}
-                    onClick={closeModal}
+                    onClick={handleSave}
                   >
                     Save
                   </button>
