@@ -26,13 +26,13 @@ export const SocialCreatePage = () => {
     setOpenBannerModal(true);
   }, []);
 
-    const {
-      register,
-      formState: { errors },
-      handleSubmit,
-    } = useForm();
-    const onSubmit = (data:any) => console.log(data);
-    console.log('errors', errors)
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
+  const onSubmit = (data: any) => console.log(data);
+  console.log("errors", errors);
 
   return (
     <>
@@ -89,7 +89,19 @@ export const SocialCreatePage = () => {
                                     styles.headingContainer
                                   )}
                                   defaultText="Date"
-                                  name={SOCIAL_FIELDS.DATE_START_AT}
+                                  // name={SOCIAL_FIELDS.DATE_START_AT}
+                                  {...register(SOCIAL_FIELDS.DATE_START_AT, {
+                                    required: "Date is required",
+                                  })}
+                                  aria-invalid={
+                                    errors?.[SOCIAL_FIELDS.DATE_START_AT]
+                                      ? "true"
+                                      : "false"
+                                  }
+                                  errors={
+                                    errors?.[SOCIAL_FIELDS.DATE_START_AT]
+                                      ?.message as string
+                                  }
                                 ></InputDateTime>
                               </div>
                               <div
@@ -108,7 +120,19 @@ export const SocialCreatePage = () => {
                                     styles.headingContainer
                                   )}
                                   defaultText="Time"
-                                  name={SOCIAL_FIELDS.TIME_START_AT}
+                                  // name={SOCIAL_FIELDS.TIME_START_AT}
+                                  {...register(SOCIAL_FIELDS.TIME_START_AT, {
+                                    required: "Time is required",
+                                  })}
+                                  aria-invalid={
+                                    errors?.[SOCIAL_FIELDS.TIME_START_AT]
+                                      ? "true"
+                                      : "false"
+                                  }
+                                  errors={
+                                    errors?.[SOCIAL_FIELDS.TIME_START_AT]
+                                      ?.message as string
+                                  }
                                 ></InputTime>
                               </div>
                             </div>
@@ -128,9 +152,21 @@ export const SocialCreatePage = () => {
                                 </div>
                                 <div className={styles.imageWrapper}>
                                   <InputText
-                                    name={SOCIAL_FIELDS.VENUE}
                                     defaultText="Venue"
                                     className={styles.headingWrapper1}
+                                    // name={SOCIAL_FIELDS.VENUE}
+                                    {...register(SOCIAL_FIELDS.VENUE, {
+                                      required: "Venue is required",
+                                    })}
+                                    aria-invalid={
+                                      errors?.[SOCIAL_FIELDS.VENUE]
+                                        ? "true"
+                                        : "false"
+                                    }
+                                    errors={
+                                      errors?.[SOCIAL_FIELDS.VENUE]
+                                        ?.message as string
+                                    }
                                   />
                                 </div>
                               </div>
@@ -148,9 +184,21 @@ export const SocialCreatePage = () => {
                                   />
 
                                   <InputText
-                                    name={SOCIAL_FIELDS.CAPACITY}
                                     defaultText="Max capacity"
                                     className={styles.headingWrapper2}
+                                    // name={SOCIAL_FIELDS.CAPACITY}
+                                    {...register(SOCIAL_FIELDS.CAPACITY, {
+                                      required: "Capacity is required",
+                                    })}
+                                    aria-invalid={
+                                      errors?.[SOCIAL_FIELDS.CAPACITY]
+                                        ? "true"
+                                        : "false"
+                                    }
+                                    errors={
+                                      errors?.[SOCIAL_FIELDS.CAPACITY]
+                                        ?.message as string
+                                    }
                                   />
                                 </div>
                                 <div
@@ -165,9 +213,10 @@ export const SocialCreatePage = () => {
                                     )}
                                   />
                                   <InputText
-                                    name={SOCIAL_FIELDS.PRICE}
                                     defaultText="Cost per person"
                                     className={styles.headingWrapper2}
+                                    // name={SOCIAL_FIELDS.PRICE}
+                                    {...register(SOCIAL_FIELDS.PRICE, {})}
                                   />
                                 </div>
                               </div>
@@ -179,7 +228,19 @@ export const SocialCreatePage = () => {
                               <InputArea
                                 className={styles.input}
                                 defaultText="Description of your event.."
-                                name={SOCIAL_FIELDS.DESCRIPTION}
+                                // name={SOCIAL_FIELDS.DESCRIPTION}
+                                {...register(SOCIAL_FIELDS.DESCRIPTION, {
+                                  required: "Description is required",
+                                })}
+                                aria-invalid={
+                                  errors?.[SOCIAL_FIELDS.DESCRIPTION]
+                                    ? "true"
+                                    : "false"
+                                }
+                                errors={
+                                  errors?.[SOCIAL_FIELDS.DESCRIPTION]
+                                    ?.message as string
+                                }
                               />
                             </div>
                             <div className={styles.hintText}>
@@ -205,7 +266,11 @@ export const SocialCreatePage = () => {
                                           styles.checkboxBase,
                                           "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:bg-gray-700"
                                         )}
-                                        name={SOCIAL_FIELDS.IS_MANUAL_APPROVE}
+                                        // name={SOCIAL_FIELDS.IS_MANUAL_APPROVE}
+                                        {...register(
+                                          SOCIAL_FIELDS.IS_MANUAL_APPROVE,
+                                          {}
+                                        )}
                                       />
                                       <div className={styles.label}>
                                         I want to approve attendees
@@ -233,13 +298,24 @@ export const SocialCreatePage = () => {
                                         <div className={styles.input1}>
                                           <input
                                             id="helper-radio-4"
-                                            name={SOCIAL_FIELDS.PRIVACY}
                                             type="radio"
-                                            value=""
+                                            value="Public"
                                             className={classNames(
                                               styles.checkboxBase1,
                                               "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300  dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 dark:bg-gray-600 "
                                             )}
+                                            // name={SOCIAL_FIELDS.PRIVACY}
+                                            {...register(
+                                              SOCIAL_FIELDS.PRIVACY,
+                                              {
+                                                required: "Privacy is required",
+                                              }
+                                            )}
+                                            aria-invalid={
+                                              errors?.[SOCIAL_FIELDS.PRIVACY]
+                                                ? "true"
+                                                : "false"
+                                            }
                                           />
                                         </div>
                                         <div
@@ -258,13 +334,24 @@ export const SocialCreatePage = () => {
                                         <div className={styles.input1}>
                                           <input
                                             id="helper-radio-4"
-                                            name={SOCIAL_FIELDS.PRIVACY}
                                             type="radio"
-                                            value=""
+                                            value="Curated Audience"
                                             className={classNames(
                                               styles.checkboxBase1,
                                               "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300  dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 dark:bg-gray-600 "
                                             )}
+                                            // name={SOCIAL_FIELDS.PRIVACY}
+                                            {...register(
+                                              SOCIAL_FIELDS.PRIVACY,
+                                              {
+                                                required: "Privacy is required",
+                                              }
+                                            )}
+                                            aria-invalid={
+                                              errors?.[SOCIAL_FIELDS.PRIVACY]
+                                                ? "true"
+                                                : "false"
+                                            }
                                           />
                                         </div>
                                         <div
@@ -283,13 +370,24 @@ export const SocialCreatePage = () => {
                                         <div className={styles.input1}>
                                           <input
                                             id="helper-radio-4"
-                                            name={SOCIAL_FIELDS.PRIVACY}
                                             type="radio"
-                                            value=""
+                                            value="Community Only"
                                             className={classNames(
                                               styles.checkboxBase1,
                                               "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300  dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 dark:bg-gray-600 "
                                             )}
+                                            // name={SOCIAL_FIELDS.PRIVACY}
+                                            {...register(
+                                              SOCIAL_FIELDS.PRIVACY,
+                                              {
+                                                required: "Privacy is required",
+                                              }
+                                            )}
+                                            aria-invalid={
+                                              errors?.[SOCIAL_FIELDS.PRIVACY]
+                                                ? "true"
+                                                : "false"
+                                            }
                                           />
                                         </div>
                                         <div

@@ -54,9 +54,9 @@ export function InputDateTime({
   if (onlyView) return onlyView;
 
   return (
-    <>
+    <div>
       {editing ? (
-        <>
+        <div className="flex flex-cols">
           <DatePicker
             ref={wrapperRef}
             className={classNames(className)}
@@ -117,13 +117,13 @@ export function InputDateTime({
             selected={startDate}
             onChange={(date) => setStartDate(date)}
           />
-          {<ErrorMessage errors={errors} />}
-        </>
+        </div>
       ) : (
         <div className={classNames(className)} onClick={handleClick}>
           {value}
         </div>
       )}
-    </>
+      {<ErrorMessage errors={errors} />}
+    </div>
   );
 }

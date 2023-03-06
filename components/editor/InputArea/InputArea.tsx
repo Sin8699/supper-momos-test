@@ -42,7 +42,6 @@ export function InputArea({
             ref={wrapperRef}
             onChange={(e) => setValue(e.target.value)}
           />
-          {<ErrorMessage errors={errors} />}
         </>
       ) : (
         <div
@@ -52,6 +51,7 @@ export function InputArea({
           {value || defaultText}
         </div>
       )}
+      {<ErrorMessage errors={errors} />}
     </>
   );
 }
