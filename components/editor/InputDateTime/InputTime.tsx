@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { ComponentProps, PropsWithChildren, useRef, useState } from "react";
+import { ComponentProps, PropsWithChildren, useCallback, useRef, useState } from "react";
 import useOnClickOutside from "../../../hooks/useOnClickOutside";
 import DatePicker from "react-datepicker";
 import s from "./InputTime.module.scss";
@@ -11,11 +11,12 @@ const range = (start: number, stop: number, step = 1) =>
     .fill(start)
     .map((x, y) => x + y * step);
 
-interface InputTimeProps extends ComponentProps<"input"> {
+interface InputTimeProps {
   onlyView?: JSX.Element;
   defaultText: string;
   className?: string;
   errors?: string;
+  onChange?: (value: Date | null) => void;
 }
 
 export function InputTime({
@@ -23,6 +24,7 @@ export function InputTime({
   defaultText,
   className,
   errors,
+  onChange,
 }: PropsWithChildren<InputTimeProps>): JSX.Element {
   const [editing, setEditing] = useState<boolean>(false);
   const [value, setValue] = useState<string>(defaultText);
@@ -31,15 +33,20 @@ export function InputTime({
 
   const wrapperRef = useRef(null);
 
+  const handleUpdateValue = useCallback((date: Date | null) => {
+    handleDateChange(date);
+    onChange?.(date);
+  }, []);
+
   if (onlyView) return onlyView;
 
   return (
-    <>
+    <div className="flex flex-col w-full">
       {editing ? (
         <>
           <DatePicker
             selected={date}
-            onChange={handleDateChange}
+            onChange={handleUpdateValue}
             showTimeSelect
             showTimeSelectOnly
             timeIntervals={15}
@@ -48,7 +55,6 @@ export function InputTime({
             ref={wrapperRef}
             className={classNames(className)}
           />
-          {<ErrorMessage errors={errors} />}
         </>
       ) : (
         <div
@@ -58,6 +64,7 @@ export function InputTime({
           {value}
         </div>
       )}
-    </>
+      {<ErrorMessage errors={errors} />}
+    </div>
   );
 }

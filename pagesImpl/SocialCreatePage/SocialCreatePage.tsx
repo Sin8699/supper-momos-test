@@ -14,25 +14,31 @@ import { InputDateTime } from "../../components/editor/InputDateTime/InputDateTi
 import { InputTime } from "../../components/editor/InputDateTime/InputTime";
 import PickTagSocial from "./components/PickTagSocial/PickTagSocial";
 import { InputArea } from "../../components/editor/InputArea/InputArea";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { DEFAULT_SOCIAL_TAGS, SOCIAL_FIELDS } from "./constants";
+import { useMutationCreateSocial } from "./queries/get/useQuerySearchTitle";
+import { ErrorMessage } from "../../components/ErrorMessage";
 
 export const SocialCreatePage = () => {
   const [openBannerModal, setOpenBannerModal] = useState(false);
-  const [bannerURL, setBannerURL] = useState<string>();
-  const [tags, setTags] = useState([DEFAULT_SOCIAL_TAGS[0]]);
 
   const openModal = useCallback(() => {
     setOpenBannerModal(true);
   }, []);
 
+  const {} = useMutationCreateSocial();
+
   const {
     register,
     formState: { errors },
     handleSubmit,
+    control,
+    getValues
   } = useForm();
-  const onSubmit = (data: any) => console.log(data);
-  console.log("errors", errors);
+  console.log("errors", errors, getValues());
+  const onSubmit = (data: any) => {
+    console.log(data);
+  };
 
   return (
     <>
@@ -46,8 +52,14 @@ export const SocialCreatePage = () => {
                 <div className={styles.addABanner}>Add a banner</div>
               </div>
             </div>
-            <img src={bannerURL} className={styles.image} onClick={openModal} />
-
+            <img src={getValues()?.banner} className={styles.image} onClick={openModal} />
+            {errors?.[SOCIAL_FIELDS.BANNER]?.message && (
+              <div className={styles.errorBanner}>
+                <ErrorMessage
+                  errors={errors?.[SOCIAL_FIELDS.BANNER]?.message as string}
+                />
+              </div>
+            )}
             <div className={styles.heroHeaderSection}>
               <div className={styles.section}>
                 <div className={styles.section1}>
@@ -57,20 +69,26 @@ export const SocialCreatePage = () => {
                         <div className={styles.headingAndSupportingText}>
                           <div className={styles.frameParent}>
                             <div className={styles.frameWrapper}>
-                              <InputText
-                                className={styles.headingWrapper}
-                                defaultText="Untitle Event"
-                                // name={SOCIAL_FIELDS.TITLE}
+                              <Controller
                                 {...register(SOCIAL_FIELDS.TITLE, {
                                   required: "Title is required",
                                 })}
-                                aria-invalid={
-                                  errors?.[SOCIAL_FIELDS.TITLE]
-                                    ? "true"
-                                    : "false"
-                                }
-                                errors={errors?.title?.message as string}
-                              ></InputText>
+                                control={control}
+                                render={({ field }) => (
+                                  <InputText
+                                    className={styles.headingWrapper}
+                                    defaultText="Untitle Event"
+                                    // name={SOCIAL_FIELDS.TITLE}
+                                    aria-invalid={
+                                      errors?.[SOCIAL_FIELDS.TITLE]
+                                        ? "true"
+                                        : "false"
+                                    }
+                                    errors={errors?.title?.message as string}
+                                    onChange={field.onChange}
+                                  ></InputText>
+                                )}
+                              />
                             </div>
                             <div className={styles.frameGroup}>
                               <div
@@ -83,26 +101,27 @@ export const SocialCreatePage = () => {
                                   )}
                                 />
 
-                                <InputDateTime
-                                  className={classNames(
-                                    "w-[181px]",
-                                    styles.headingContainer
-                                  )}
-                                  defaultText="Date"
-                                  // name={SOCIAL_FIELDS.DATE_START_AT}
+                                <Controller
                                   {...register(SOCIAL_FIELDS.DATE_START_AT, {
                                     required: "Date is required",
                                   })}
-                                  aria-invalid={
-                                    errors?.[SOCIAL_FIELDS.DATE_START_AT]
-                                      ? "true"
-                                      : "false"
-                                  }
-                                  errors={
-                                    errors?.[SOCIAL_FIELDS.DATE_START_AT]
-                                      ?.message as string
-                                  }
-                                ></InputDateTime>
+                                  control={control}
+                                  render={({ field }) => (
+                                    <InputDateTime
+                                      className={classNames(
+                                        "w-[181px]",
+                                        styles.headingContainer
+                                      )}
+                                      defaultText="Date"
+                                      // name={SOCIAL_FIELDS.DATE_START_AT}
+                                      errors={
+                                        errors?.[SOCIAL_FIELDS.DATE_START_AT]
+                                          ?.message as string
+                                      }
+                                      onChange={field.onChange}
+                                    ></InputDateTime>
+                                  )}
+                                />
                               </div>
                               <div
                                 className={styles.mediaIconfilledclockParent}
@@ -114,26 +133,31 @@ export const SocialCreatePage = () => {
                                   )}
                                 />
 
-                                <InputTime
-                                  className={classNames(
-                                    "max-w-[181px]",
-                                    styles.headingContainer
-                                  )}
-                                  defaultText="Time"
-                                  // name={SOCIAL_FIELDS.TIME_START_AT}
+                                <Controller
                                   {...register(SOCIAL_FIELDS.TIME_START_AT, {
                                     required: "Time is required",
                                   })}
-                                  aria-invalid={
-                                    errors?.[SOCIAL_FIELDS.TIME_START_AT]
-                                      ? "true"
-                                      : "false"
-                                  }
-                                  errors={
-                                    errors?.[SOCIAL_FIELDS.TIME_START_AT]
-                                      ?.message as string
-                                  }
-                                ></InputTime>
+                                  control={control}
+                                  render={({ field }) => (
+                                    <InputTime
+                                      className={classNames(
+                                        "max-w-[181px]",
+                                        styles.headingContainer
+                                      )}
+                                      defaultText="Time"
+                                      aria-invalid={
+                                        errors?.[SOCIAL_FIELDS.TIME_START_AT]
+                                          ? "true"
+                                          : "false"
+                                      }
+                                      errors={
+                                        errors?.[SOCIAL_FIELDS.TIME_START_AT]
+                                          ?.message as string
+                                      }
+                                      onChange={field.onChange}
+                                    ></InputTime>
+                                  )}
+                                />
                               </div>
                             </div>
                             <div className={styles.frameDiv}>
@@ -151,22 +175,27 @@ export const SocialCreatePage = () => {
                                   />
                                 </div>
                                 <div className={styles.imageWrapper}>
-                                  <InputText
-                                    defaultText="Venue"
-                                    className={styles.headingWrapper1}
-                                    // name={SOCIAL_FIELDS.VENUE}
+                                  <Controller
                                     {...register(SOCIAL_FIELDS.VENUE, {
                                       required: "Venue is required",
                                     })}
-                                    aria-invalid={
-                                      errors?.[SOCIAL_FIELDS.VENUE]
-                                        ? "true"
-                                        : "false"
-                                    }
-                                    errors={
-                                      errors?.[SOCIAL_FIELDS.VENUE]
-                                        ?.message as string
-                                    }
+                                    control={control}
+                                    render={({ field }) => (
+                                      <InputText
+                                        defaultText="Venue"
+                                        className={styles.headingWrapper1}
+                                        aria-invalid={
+                                          errors?.[SOCIAL_FIELDS.VENUE]
+                                            ? "true"
+                                            : "false"
+                                        }
+                                        errors={
+                                          errors?.[SOCIAL_FIELDS.VENUE]
+                                            ?.message as string
+                                        }
+                                        onChange={field.onChange}
+                                      ></InputText>
+                                    )}
                                   />
                                 </div>
                               </div>
@@ -182,23 +211,29 @@ export const SocialCreatePage = () => {
                                       styles.iconForm
                                     )}
                                   />
-
-                                  <InputText
-                                    defaultText="Max capacity"
-                                    className={styles.headingWrapper2}
-                                    // name={SOCIAL_FIELDS.CAPACITY}
+                                  <Controller
                                     {...register(SOCIAL_FIELDS.CAPACITY, {
                                       required: "Capacity is required",
                                     })}
-                                    aria-invalid={
-                                      errors?.[SOCIAL_FIELDS.CAPACITY]
-                                        ? "true"
-                                        : "false"
-                                    }
-                                    errors={
-                                      errors?.[SOCIAL_FIELDS.CAPACITY]
-                                        ?.message as string
-                                    }
+                                    control={control}
+                                    render={({ field }) => (
+                                      <InputText
+                                        defaultText="Max capacity"
+                                        className={styles.headingWrapper2}
+                                        // name={SOCIAL_FIELDS.CAPACITY}
+
+                                        aria-invalid={
+                                          errors?.[SOCIAL_FIELDS.CAPACITY]
+                                            ? "true"
+                                            : "false"
+                                        }
+                                        errors={
+                                          errors?.[SOCIAL_FIELDS.CAPACITY]
+                                            ?.message as string
+                                        }
+                                        onChange={field.onChange}
+                                      ></InputText>
+                                    )}
                                   />
                                 </div>
                                 <div
@@ -212,11 +247,18 @@ export const SocialCreatePage = () => {
                                       styles.iconForm
                                     )}
                                   />
-                                  <InputText
-                                    defaultText="Cost per person"
-                                    className={styles.headingWrapper2}
-                                    // name={SOCIAL_FIELDS.PRICE}
+
+                                  <Controller
                                     {...register(SOCIAL_FIELDS.PRICE, {})}
+                                    control={control}
+                                    render={({ field }) => (
+                                      <InputText
+                                        defaultText="Cost per person"
+                                        className={styles.headingWrapper2}
+                                        // name={SOCIAL_FIELDS.PRICE}
+                                        onChange={field.onChange}
+                                      ></InputText>
+                                    )}
                                   />
                                 </div>
                               </div>
@@ -225,22 +267,29 @@ export const SocialCreatePage = () => {
                           <div className={styles.textareaInputField}>
                             <div className={styles.inputWithLabel}>
                               <div className={styles.label}>Description</div>
-                              <InputArea
-                                className={styles.input}
-                                defaultText="Description of your event.."
-                                // name={SOCIAL_FIELDS.DESCRIPTION}
+                              <Controller
                                 {...register(SOCIAL_FIELDS.DESCRIPTION, {
                                   required: "Description is required",
                                 })}
-                                aria-invalid={
-                                  errors?.[SOCIAL_FIELDS.DESCRIPTION]
-                                    ? "true"
-                                    : "false"
-                                }
-                                errors={
-                                  errors?.[SOCIAL_FIELDS.DESCRIPTION]
-                                    ?.message as string
-                                }
+                                control={control}
+                                render={({ field }) => (
+                                  <InputArea
+                                    className={styles.input}
+                                    defaultText="Description of your event.."
+                                    // name={SOCIAL_FIELDS.DESCRIPTION}
+
+                                    aria-invalid={
+                                      errors?.[SOCIAL_FIELDS.DESCRIPTION]
+                                        ? "true"
+                                        : "false"
+                                    }
+                                    errors={
+                                      errors?.[SOCIAL_FIELDS.DESCRIPTION]
+                                        ?.message as string
+                                    }
+                                    onChange={field.onChange}
+                                  />
+                                )}
                               />
                             </div>
                             <div className={styles.hintText}>
@@ -285,8 +334,22 @@ export const SocialCreatePage = () => {
                                       <div
                                         className={styles.textAndSupportingText}
                                       >
-                                        <div className={styles.text6}>
+                                        <div
+                                          className={classNames(
+                                            styles.text6,
+                                            "flex gap-3 items-center"
+                                          )}
+                                        >
                                           Privacy
+                                          {errors?.[SOCIAL_FIELDS.PRIVACY]
+                                            ?.message && (
+                                            <ErrorMessage
+                                              errors={
+                                                errors?.[SOCIAL_FIELDS.PRIVACY]
+                                                  ?.message as string
+                                              }
+                                            />
+                                          )}
                                         </div>
                                         <div
                                           className={styles.supportingText}
@@ -417,10 +480,26 @@ export const SocialCreatePage = () => {
                                       </div>
                                     </div>
                                   </div>
-
-                                  <PickTagSocial
-                                    tags={tags}
-                                    setTags={setTags}
+                                  <Controller
+                                    {...register(SOCIAL_FIELDS.TAGS, {
+                                      required: "Tags is required",
+                                    })}
+                                    control={control}
+                                    render={({ field }) => (
+                                      <PickTagSocial
+                                        tags={field?.value || []}
+                                        onChange={field.onChange}
+                                        aria-invalid={
+                                          errors?.[SOCIAL_FIELDS.TAGS]
+                                            ? "true"
+                                            : "false"
+                                        }
+                                        errors={
+                                          errors?.[SOCIAL_FIELDS.TAGS]
+                                            ?.message as string
+                                        }
+                                      />
+                                    )}
                                   />
                                 </div>
                               </div>
@@ -439,10 +518,19 @@ export const SocialCreatePage = () => {
           </div>
         </form>
       </div>
-      <UploadBannerModal
-        open={openBannerModal}
-        setOpen={setOpenBannerModal}
-        onChange={setBannerURL}
+
+      <Controller
+        {...register(SOCIAL_FIELDS.BANNER, {
+          required: "Banner is required",
+        })}
+        control={control}
+        render={({ field }) => (
+          <UploadBannerModal
+            open={openBannerModal}
+            setOpen={setOpenBannerModal}
+            onChange={field.onChange}
+          />
+        )}
       />
     </>
   );

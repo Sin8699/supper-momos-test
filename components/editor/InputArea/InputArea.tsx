@@ -1,5 +1,12 @@
 import classNames from "classnames";
-import { ComponentProps, PropsWithChildren, useRef, useState } from "react";
+import {
+  ChangeEvent,
+  ComponentProps,
+  PropsWithChildren,
+  useCallback,
+  useRef,
+  useState,
+} from "react";
 import useOnClickOutside from "../../../hooks/useOnClickOutside";
 import { ErrorMessage } from "../../ErrorMessage";
 
@@ -17,6 +24,7 @@ export function InputArea({
   defaultText,
   className,
   errors,
+  ...inputProps
 }: PropsWithChildren<InputAreaProps>): JSX.Element {
   const [editing, setEditing] = useState<boolean>(false);
   const [value, setValue] = useState<string>();
@@ -29,6 +37,12 @@ export function InputArea({
 
   useOnClickOutside(wrapperRef, handleClickOutside);
 
+  const handleChange = useCallback((e: any) => {
+    const value = e.target.value;
+    inputProps?.onChange?.(value as any);
+    setValue(value);
+  }, []);
+
   if (onlyView) return onlyView;
 
   return (
@@ -40,7 +54,7 @@ export function InputArea({
             value={value}
             autoFocus
             ref={wrapperRef}
-            onChange={(e) => setValue(e.target.value)}
+            onChange={handleChange as any}
           />
         </>
       ) : (

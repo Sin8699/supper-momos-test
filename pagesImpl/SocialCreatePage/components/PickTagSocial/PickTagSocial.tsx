@@ -14,27 +14,28 @@ import { DEFAULT_SOCIAL_TAGS } from "../../constants";
 import { XMarkIcon } from "@heroicons/react/20/solid";
 
 import s from "./PickTagSocial.module.scss";
+import { ErrorMessage } from "../../../../components/ErrorMessage";
 
-interface PickTagSocialProps extends ComponentProps<"input"> {
+interface PickTagSocialProps {
   tags: string[];
-  setTags: Dispatch<SetStateAction<string[]>>;
+  errors?: string;
+  onChange: (t: string[]) => void;
 }
 
 export default function PickTagSocial(props: PickTagSocialProps) {
-
-  const { tags, setTags } = props;
+  const { tags, onChange, errors } = props;
 
   const clearTag = (tag: string) => () => {
-    setTags((prev) => prev.filter((t) => t !== tag));
+    onChange(tags.filter((t) => t !== tag));
   };
 
   const addTag = (tag: string) => () => {
-    setTags((prev) => [...prev, tag]);
+    onChange([...tags, tag]);
   };
 
   return (
     <div className={s.form}>
-      <div className={s.formFields}>
+      <div className={classNames(s.formFields, "mb-1")}>
         <div className="flex flex-wrap gap-2">
           {tags.map((tag) => (
             <div className={s.badge} key={tag}>
@@ -63,6 +64,7 @@ export default function PickTagSocial(props: PickTagSocialProps) {
           })}
         </div>
       </div>
+      {errors && <ErrorMessage errors={errors} />}
     </div>
   );
 }

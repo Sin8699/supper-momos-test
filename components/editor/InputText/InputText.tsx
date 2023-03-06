@@ -1,5 +1,13 @@
 import classNames from "classnames";
-import { ComponentProps, PropsWithChildren, useRef, useState } from "react";
+import {
+  ChangeEvent,
+  ChangeEventHandler,
+  ComponentProps,
+  PropsWithChildren,
+  useCallback,
+  useRef,
+  useState,
+} from "react";
 import useOnClickOutside from "../../../hooks/useOnClickOutside";
 import { ErrorMessage } from "../../ErrorMessage";
 
@@ -17,6 +25,7 @@ export function InputText({
   defaultText,
   className,
   errors,
+  ...inputProps
 }: PropsWithChildren<InputTextProps>): JSX.Element {
   const [editing, setEditing] = useState<boolean>(false);
   const [value, setValue] = useState<string>();
@@ -29,10 +38,16 @@ export function InputText({
 
   useOnClickOutside(wrapperRef, handleClickOutside);
 
+  const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    inputProps?.onChange?.(value as any);
+    setValue(value);
+  }, []);
+
   if (onlyView) return onlyView;
 
   return (
-    <>
+    <div className="flex flex-col">
       {editing ? (
         <>
           <input
@@ -40,9 +55,8 @@ export function InputText({
             value={value}
             autoFocus
             ref={wrapperRef}
-            onChange={(e) => setValue(e.target.value)}
+            onChange={handleChange}
           />
-          {<ErrorMessage errors={errors} />}
         </>
       ) : (
         <div
@@ -52,6 +66,7 @@ export function InputText({
           {value || defaultText}
         </div>
       )}
-    </>
+      {<ErrorMessage errors={errors} />}
+    </div>
   );
 }

@@ -1,5 +1,11 @@
 import classNames from "classnames";
-import { ComponentProps, PropsWithChildren, useRef, useState } from "react";
+import {
+  ComponentProps,
+  PropsWithChildren,
+  useCallback,
+  useRef,
+  useState,
+} from "react";
 import useOnClickOutside from "../../../hooks/useOnClickOutside";
 import DatePicker from "react-datepicker";
 import s from "./InputDateTime.module.scss";
@@ -11,11 +17,12 @@ const range = (start: number, stop: number, step = 1) =>
     .fill(start)
     .map((x, y) => x + y * step);
 
-interface InputDateTimeProps extends ComponentProps<"input"> {
+interface InputDateTimeProps {
   onlyView?: JSX.Element;
   defaultText: string;
   className?: string;
   errors?: string;
+  onChange?: (value: Date | null) => void;
 }
 
 export function InputDateTime({
@@ -23,6 +30,7 @@ export function InputDateTime({
   defaultText,
   className,
   errors,
+  onChange,
 }: PropsWithChildren<InputDateTimeProps>): JSX.Element {
   const [editing, setEditing] = useState<boolean>(false);
   const [value, setValue] = useState<string>(defaultText);
@@ -51,10 +59,15 @@ export function InputDateTime({
     setEditing((prev) => !prev);
   };
 
+  const handleUpdateValue = useCallback((date: Date | null) => {
+    setStartDate(date);
+    onChange?.(date);
+  }, []);
+
   if (onlyView) return onlyView;
 
   return (
-    <div>
+    <div className="flex flex-col w-full">
       {editing ? (
         <div className="flex flex-cols">
           <DatePicker
@@ -115,7 +128,7 @@ export function InputDateTime({
               </div>
             )}
             selected={startDate}
-            onChange={(date) => setStartDate(date)}
+            onChange={handleUpdateValue}
           />
         </div>
       ) : (
