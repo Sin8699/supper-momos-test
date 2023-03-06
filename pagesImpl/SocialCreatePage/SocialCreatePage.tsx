@@ -26,7 +26,8 @@ export const SocialCreatePage = () => {
     setOpenBannerModal(true);
   }, []);
 
-  const {} = useMutationCreateSocial();
+  const {mutate:createSocial,data} = useMutationCreateSocial();
+  console.log('data', data)
 
   const {
     register,
@@ -38,6 +39,7 @@ export const SocialCreatePage = () => {
   console.log("errors", errors, getValues());
   const onSubmit = (data: any) => {
     console.log(data);
+    createSocial(data);
   };
 
   return (
