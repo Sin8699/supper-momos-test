@@ -15,9 +15,10 @@ import { InputTime } from "../../components/editor/InputDateTime/InputTime";
 import PickTagSocial from "./components/PickTagSocial/PickTagSocial";
 import { InputArea } from "../../components/editor/InputArea/InputArea";
 import { Controller, useForm } from "react-hook-form";
-import { DEFAULT_SOCIAL_TAGS, SOCIAL_FIELDS } from "./constants";
+import { SOCIAL_FIELDS } from "./constants";
 import { useMutationCreateSocial } from "./queries/get/useQuerySearchTitle";
 import { ErrorMessage } from "../../components/ErrorMessage";
+import dayjs from "dayjs";
 
 export const SocialCreatePage = () => {
   const [openBannerModal, setOpenBannerModal] = useState(false);
@@ -26,20 +27,32 @@ export const SocialCreatePage = () => {
     setOpenBannerModal(true);
   }, []);
 
-  const {mutate:createSocial,data} = useMutationCreateSocial();
-  console.log('data', data)
+  const { mutate: createSocial, data: response } = useMutationCreateSocial();
+  console.log("response", response);
 
   const {
     register,
     formState: { errors },
     handleSubmit,
     control,
-    getValues
+    getValues,
   } = useForm();
-  console.log("errors", errors, getValues());
+
   const onSubmit = (data: any) => {
-    console.log(data);
-    createSocial(data);
+    const { time, startAt: startDate } = data;
+    const h = dayjs(time).hour();
+    const m = dayjs(time).minute();
+    const s = dayjs(time).second();
+
+    const startAt = dayjs(startDate)
+      .set("hour", h)
+      .set("minute", m)
+      .set("second", s);
+
+    createSocial({
+      ...data,
+      startAt,
+    });
   };
 
   return (
@@ -54,7 +67,11 @@ export const SocialCreatePage = () => {
                 <div className={styles.addABanner}>Add a banner</div>
               </div>
             </div>
-            <img src={getValues()?.banner} className={styles.image} onClick={openModal} />
+            <img
+              src={getValues()?.banner}
+              className={styles.image}
+              onClick={openModal}
+            />
             {errors?.[SOCIAL_FIELDS.BANNER]?.message && (
               <div className={styles.errorBanner}>
                 <ErrorMessage

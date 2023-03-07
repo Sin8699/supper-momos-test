@@ -35,7 +35,7 @@ export function InputDateTime({
   const [editing, setEditing] = useState<boolean>(false);
   const [value, setValue] = useState<string>(defaultText);
 
-  const [startDate, setStartDate] = useState<Date | null>(new Date());
+  const [startDate, setStartDate] = useState<Date | null>();
 
   const years = range(1990, new Date().getFullYear() + 1, 1);
   const months = [

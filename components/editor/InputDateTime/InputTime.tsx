@@ -27,7 +27,7 @@ export function InputTime({
   onChange,
 }: PropsWithChildren<InputTimeProps>): JSX.Element {
   const [editing, setEditing] = useState<boolean>(false);
-  const [value, setValue] = useState<string>(defaultText);
+  const [value, setValue] = useState<string>();
 
   const [date, handleDateChange] = useState<Date | null>(new Date());
 
