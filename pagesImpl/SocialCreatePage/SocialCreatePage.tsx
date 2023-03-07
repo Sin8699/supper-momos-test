@@ -128,13 +128,18 @@ export const SocialCreatePage = () => {
                                     }
                                     errors={errors?.title?.message as string}
                                     onChange={field.onChange}
-                                    onlyView={(value) => (
-                                      <div className={styles.frameWrapper}>
-                                        <div className={styles.headingWrapper}>
-                                          {value as string}
+                                    onlyView={
+                                      showDetail &&
+                                      ((value) => (
+                                        <div className={styles.frameWrapper}>
+                                          <div
+                                            className={styles.headingWrapper}
+                                          >
+                                            {value as string}
+                                          </div>
                                         </div>
-                                      </div>
-                                    )}
+                                      ))
+                                    }
                                   ></InputText>
                                 </div>
                               )}
@@ -287,11 +292,13 @@ export const SocialCreatePage = () => {
                                             ?.message as string
                                         }
                                         onChange={field.onChange}
-                                        onlyView={(value) =>
-                                          `${pluralize(
-                                            "people",
-                                            value as number
-                                          )}`
+                                        onlyView={
+                                          showDetail &&
+                                          ((value) =>
+                                            `${pluralize(
+                                              "people",
+                                              value as number
+                                            )}`)
                                         }
                                       ></InputText>
                                     )}
@@ -322,7 +329,9 @@ export const SocialCreatePage = () => {
                                         className={styles.headingWrapper2}
                                         // name={SOCIAL_FIELDS.PRICE}
                                         onChange={field.onChange}
-                                        onlyView={(value) => `$${value}`}
+                                        onlyView={
+                                          showDetail && ((value) => `$${value}`)
+                                        }
                                       ></InputText>
                                     )}
                                   />
@@ -354,14 +363,17 @@ export const SocialCreatePage = () => {
                                         ?.message as string
                                     }
                                     onChange={field.onChange}
-                                    onlyView={(value) => (
-                                      <div
-                                        className={styles.description}
-                                        dangerouslySetInnerHTML={{
-                                          __html: value as string,
-                                        }}
-                                      ></div>
-                                    )}
+                                    onlyView={
+                                      showDetail &&
+                                      ((value) => (
+                                        <div
+                                          className={styles.description}
+                                          dangerouslySetInnerHTML={{
+                                            __html: value as string,
+                                          }}
+                                        ></div>
+                                      ))
+                                    }
                                   />
                                 )}
                               />
