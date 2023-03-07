@@ -5,7 +5,30 @@
 // Importing external CSS code, fonts, etc.
 @import url("https://fonts.googleapis.com/css2?family=Proxima+Nova:wght@600&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap");
-// @import url("https://fonts.googleapis.com/css2?family=Neue+Haas+Grotesk+Display+Pro:wght@400&display=swap");
+
+@font-face {
+  font-family: 'Neue Haas Grotesk Display Pro';
+  src: url("/font/NeueHaasDisplayRoman.ttf") format("truetype");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Neue Haas Grotesk Display Pro';
+  src: url("/font/NeueHaasDisplayThin.ttf") format("truetype");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Neue Haas Grotesk Display Pro';
+  src: url("/font/NeueHaasDisplayBold.ttf") format("truetype");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: 'Neue Haas Grotesk Display Pro';
+  src: url("/font/NeueHaasDisplayMediu.ttf") format("truetype");
+  font-weight: 600;
+}
 
 body {
   margin: 0;
@@ -15,7 +38,7 @@ body {
 :root {
   /* fonts */
   --text-sm-regular: Inter;
-  --font-neue-haas-grotesk-display-pro: "Neue Haas Grotesk Display Pro";
+  --font-neue-haas-grotesk-display-pro: 'Neue Haas Grotesk Display Pro';
   --font-proxima-nova: "Proxima Nova";
 
   /* font sizes */

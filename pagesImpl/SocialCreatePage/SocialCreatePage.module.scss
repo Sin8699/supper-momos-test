@@ -92,6 +92,7 @@
 }
 .heading {
   position: relative;
+  font-weight: 700;
 }
 .frameWrapper,
 .headingWrapper {
@@ -104,6 +105,7 @@
   flex-direction: row;
   padding: var(--padding-sm) var(--padding-lg);
   display: inline;
+  font-weight: 700;
   // line-height: 60px;
 }
 .frameWrapper {
@@ -130,6 +132,7 @@
   align-items: flex-start;
   justify-content: flex-start;
   line-height: 40px;
+  font-weight: 600;
 }
 .mediaIconfilledcalendarParent {
   width: 237px;
@@ -179,6 +182,7 @@
   box-sizing: border-box;
   align-items: flex-start;
   line-height: 40px;
+  font-weight: 600;
 }
 .frameParent1 {
   align-items: center;
@@ -200,6 +204,7 @@
   box-sizing: border-box;
   align-items: flex-start;
   line-height: 40px;
+  font-weight: 600;
 }
 .mediaIconfilleduserGroupParent {
   align-items: center;
@@ -232,6 +237,10 @@
   gap: var(--gap-xl);
   font-size: 48px;
   font-family: var(--font-neue-haas-grotesk-display-pro);
+
+  &.view {
+    min-height: 240px;
+  }
 }
 .label,
 .text5 {
@@ -631,6 +640,6 @@
   color: var(--dark-blue);
 }
 
-.description{
+.description {
   white-space: pre-line;
 }
