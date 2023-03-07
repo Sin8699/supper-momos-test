@@ -341,7 +341,6 @@ export const SocialCreatePage = () => {
                           </div>
                           <div className={styles.textareaInputField}>
                             <div className={styles.inputWithLabel}>
-                              <div className={styles.label}>Description</div>
                               <Controller
                                 {...register(SOCIAL_FIELDS.DESCRIPTION, {
                                   required: "Description is required",
@@ -349,6 +348,7 @@ export const SocialCreatePage = () => {
                                 control={control}
                                 render={({ field }) => (
                                   <InputArea
+                                  label="Description"
                                     className={styles.input}
                                     defaultText="Description of your event.."
                                     // name={SOCIAL_FIELDS.DESCRIPTION}

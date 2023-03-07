@@ -3,6 +3,7 @@ import "react-toastify/dist/ReactToastify.css";
 import type { AppProps } from "next/app";
 import { ReactElement, ReactNode } from "react";
 import { QueryClientProvider, QueryClient } from "react-query";
+import { ToastContainer } from "react-toastify";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -22,9 +23,12 @@ function MyApp({
     (Component as any)?.getLayout ?? ((page: ReactElement) => page);
 
   return getLayout(
-    <QueryClientProvider client={queryClient}>
-      <Component {...pageProps} />
-    </QueryClientProvider>
+    <>
+      <QueryClientProvider client={queryClient}>
+        <Component {...pageProps} />
+      </QueryClientProvider>
+      <ToastContainer />
+    </>
   );
 }
 

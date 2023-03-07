@@ -19,6 +19,7 @@ interface InputAreaProps extends ComponentProps<"textarea"> {
   defaultText: string;
   className?: string;
   errors?: string;
+  label?: string;
 }
 
 export function InputArea({
@@ -26,6 +27,7 @@ export function InputArea({
   defaultText,
   className,
   errors,
+  label,
   ...inputProps
 }: PropsWithChildren<InputAreaProps>): JSX.Element {
   const [editing, setEditing] = useState<boolean>(false);
@@ -45,11 +47,11 @@ export function InputArea({
     setValue(value);
   }, []);
 
-    if (onlyView) return <InputView onlyView={onlyView} value={value} />;
-
+  if (onlyView) return <InputView onlyView={onlyView} value={value} />;
 
   return (
     <>
+      {label && <div className={s.label}>{label}</div>}
       {editing ? (
         <>
           <textarea
