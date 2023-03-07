@@ -1,4 +1,5 @@
 import "../styles/globals.scss";
+import "react-toastify/dist/ReactToastify.css";
 import type { AppProps } from "next/app";
 import { ReactElement, ReactNode } from "react";
 import { QueryClientProvider, QueryClient } from "react-query";

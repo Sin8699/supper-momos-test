@@ -1,10 +1,19 @@
 import classNames from "classnames";
-import { ComponentProps, PropsWithChildren, useCallback, useRef, useState } from "react";
+import {
+  ComponentProps,
+  PropsWithChildren,
+  ReactNode,
+  useCallback,
+  useRef,
+  useState,
+} from "react";
 import useOnClickOutside from "../../../hooks/useOnClickOutside";
 import DatePicker from "react-datepicker";
 import s from "./InputTime.module.scss";
 import "react-datepicker/dist/react-datepicker.css";
 import { ErrorMessage } from "../../ErrorMessage";
+import dayjs from "dayjs";
+import { InputView } from "../InputView";
 
 const range = (start: number, stop: number, step = 1) =>
   Array(Math.ceil((stop - start) / step))
@@ -12,7 +21,7 @@ const range = (start: number, stop: number, step = 1) =>
     .map((x, y) => x + y * step);
 
 interface InputTimeProps {
-  onlyView?: JSX.Element;
+  onlyView?: boolean | ((v: unknown) => ReactNode);
   defaultText: string;
   className?: string;
   errors?: string;
@@ -27,7 +36,7 @@ export function InputTime({
   onChange,
 }: PropsWithChildren<InputTimeProps>): JSX.Element {
   const [editing, setEditing] = useState<boolean>(false);
-  const [value, setValue] = useState<string>();
+  const [value, setValue] = useState<string>(defaultText);
 
   const [date, handleDateChange] = useState<Date | null>(new Date());
 
@@ -38,7 +47,10 @@ export function InputTime({
     onChange?.(date);
   }, []);
 
-  if (onlyView) return onlyView;
+    if (onlyView && date)
+      return (
+        <InputView onlyView={onlyView} value={dayjs(date).format("h:mm A")} />
+      );
 
   return (
     <div className="flex flex-col w-full">

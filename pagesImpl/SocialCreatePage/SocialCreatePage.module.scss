@@ -181,7 +181,7 @@
   line-height: 40px;
 }
 .frameParent1 {
-  align-items: flex-start;
+  align-items: center;
   gap: var(--gap-sm);
 }
 .frameParent1,
@@ -629,4 +629,8 @@
 
 .iconForm {
   color: var(--dark-blue);
+}
+
+.description{
+  white-space: pre-line;
 }

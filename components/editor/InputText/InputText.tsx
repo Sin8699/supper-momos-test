@@ -4,17 +4,19 @@ import {
   ChangeEventHandler,
   ComponentProps,
   PropsWithChildren,
+  ReactNode,
   useCallback,
   useRef,
   useState,
 } from "react";
 import useOnClickOutside from "../../../hooks/useOnClickOutside";
 import { ErrorMessage } from "../../ErrorMessage";
+import { InputView } from "../InputView";
 
 import s from "./InputText.module.scss";
 
 interface InputTextProps extends ComponentProps<"input"> {
-  onlyView?: JSX.Element;
+  onlyView?: boolean | ((v: unknown) => ReactNode);
   defaultText: string;
   className?: string;
   errors?: string;
@@ -44,10 +46,10 @@ export function InputText({
     setValue(value);
   }, []);
 
-  if (onlyView) return onlyView;
+  if (onlyView) return <InputView onlyView={onlyView} value={value} />;
 
   return (
-    <div className="flex flex-col">
+    <div>
       {editing ? (
         <>
           <input

@@ -3,17 +3,19 @@ import {
   ChangeEvent,
   ComponentProps,
   PropsWithChildren,
+  ReactNode,
   useCallback,
   useRef,
   useState,
 } from "react";
 import useOnClickOutside from "../../../hooks/useOnClickOutside";
 import { ErrorMessage } from "../../ErrorMessage";
+import { InputView } from "../InputView";
 
 import s from "./InputArea.module.scss";
 
 interface InputAreaProps extends ComponentProps<"textarea"> {
-  onlyView?: JSX.Element;
+  onlyView?: boolean | ((v: unknown) => ReactNode);
   defaultText: string;
   className?: string;
   errors?: string;
@@ -43,7 +45,8 @@ export function InputArea({
     setValue(value);
   }, []);
 
-  if (onlyView) return onlyView;
+    if (onlyView) return <InputView onlyView={onlyView} value={value} />;
+
 
   return (
     <>

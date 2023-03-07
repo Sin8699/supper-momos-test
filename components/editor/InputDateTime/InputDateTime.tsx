@@ -2,6 +2,7 @@ import classNames from "classnames";
 import {
   ComponentProps,
   PropsWithChildren,
+  ReactNode,
   useCallback,
   useRef,
   useState,
@@ -11,6 +12,8 @@ import DatePicker from "react-datepicker";
 import s from "./InputDateTime.module.scss";
 import "react-datepicker/dist/react-datepicker.css";
 import { ErrorMessage } from "../../ErrorMessage";
+import dayjs from "dayjs";
+import { InputView } from "../InputView";
 
 const range = (start: number, stop: number, step = 1) =>
   Array(Math.ceil((stop - start) / step))
@@ -18,7 +21,7 @@ const range = (start: number, stop: number, step = 1) =>
     .map((x, y) => x + y * step);
 
 interface InputDateTimeProps {
-  onlyView?: JSX.Element;
+  onlyView?: boolean | ((v: unknown) => ReactNode);
   defaultText: string;
   className?: string;
   errors?: string;
@@ -64,7 +67,13 @@ export function InputDateTime({
     onChange?.(date);
   }, []);
 
-  if (onlyView) return onlyView;
+  if (onlyView && startDate)
+    return (
+      <InputView
+        onlyView={onlyView}
+        value={dayjs(startDate).format("MMMM D, YYYY")}
+      />
+    );
 
   return (
     <div className="flex flex-col w-full">
