@@ -49,8 +49,6 @@ export const SocialCreatePage = () => {
 
   const onSubmit = (data: any) => {
     const { time, startAt: startDate } = data;
-    console.log("startDate", startDate);
-    console.log("time", time);
     const h = dayjs(time).hour();
     const m = dayjs(time).minute();
     const s = dayjs(time).second();
@@ -60,16 +58,13 @@ export const SocialCreatePage = () => {
       .set("minute", m)
       .set("second", s);
 
-    delete data.time;
-    delete data.tags;
-    console.log("-----------------", {
-      ...data,
-      startAt: dateTime.toISOString(),
-    });
+    const { capacity, price, ...requestData } = data;
 
     createSocial({
-      ...data,
+      ...requestData,
       startAt: dateTime.toISOString(),
+      capacity: Number(capacity),
+      price: Number(price),
     });
 
     toast.success("Created successfully", {
@@ -153,7 +148,7 @@ export const SocialCreatePage = () => {
                                 </div>
                               )}
                             />
-                            
+
                             <DateTimeField
                               control={control}
                               errors={errors}
