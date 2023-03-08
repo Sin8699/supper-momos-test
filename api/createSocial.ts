@@ -17,17 +17,10 @@ interface CreateSocialRequest extends Social {}
 
 interface CreateSocialResponse extends Social {}
 
-// export const createSocialApi = async (values: Social) =>
-//   fetch("/interview/social", {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     mode: "no-cors", // no-cors, *cors, same-origin
-//     body: values,
-//   }).then((data) => data.json());
-
 export const createSocialApi = async (values: Social) =>
-  axiosInstance.post("/interview/social", {
-    ...values,
-  });
+  fetch("https://api.supermomos-dev.com/interview/social", {
+    method: "POST",
+    headers: new Headers({ "content-type": "application/json" }),
+    body: JSON.stringify(values),
+    mode: "no-cors", // no-cors, *cors, same-origin
+  }).then((data) => data.text());
