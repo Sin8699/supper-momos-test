@@ -24,7 +24,6 @@ interface UploadBannerModalProps {
 export default function UploadBannerModal(props: UploadBannerModalProps) {
   const { open, setOpen, onChange } = props;
   const [selected, setSelected] = useState<string>();
-  console.log("selected", selected);
 
   const cancelButtonRef = useRef(null);
 

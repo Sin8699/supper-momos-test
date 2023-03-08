@@ -2,27 +2,18 @@ import styles from "./SocialCreatePage.module.scss";
 import { ReactElement, useCallback, useState } from "react";
 import { WebLayout } from "../../components/layout/WebLayout/WebLayout";
 import CloudArrowUpIcon from "@heroicons/react/24/solid/CloudArrowUpIcon";
-import MapPinIcon from "@heroicons/react/24/solid/MapPinIcon";
-import ClockIcon from "@heroicons/react/24/solid/ClockIcon";
-import CalendarIcon from "@heroicons/react/24/solid/CalendarIcon";
 
 import classNames from "classnames";
 import { InputText } from "../../components/editor/InputText/InputText";
 import UploadBannerModal from "./components/UploadBannerModal/UploadBannerModal";
-import { InputDateTime } from "../../components/editor/InputDateTime/InputDateTime";
-import { InputTime } from "../../components/editor/InputDateTime/InputTime";
-import PickTagSocial from "./components/PickTagSocial/PickTagSocial";
-import { InputArea } from "../../components/editor/InputArea/InputArea";
 import { Controller, useForm } from "react-hook-form";
 import { SOCIAL_FIELDS } from "./constants";
 import { useMutationCreateSocial } from "./queries/get/useQuerySearchTitle";
 import { ErrorMessage } from "../../components/ErrorMessage";
 import dayjs from "dayjs";
-import { pluralize } from "../../helpers/pluralize";
 import { toast } from "react-toastify";
 import SettingBlock from "./components/SettingBlock/SettingBlock";
 import DescriptionField from "./components/DescriptionField/DescriptionField";
-import CapacityPriceField from "./components/VenueCapacityPriceField/VenueCapacityPriceField";
 import VenueCapacityPriceField from "./components/VenueCapacityPriceField/VenueCapacityPriceField";
 import DateTimeField from "./components/DateTimeField/DateTimeField";
 
@@ -45,7 +36,6 @@ export const SocialCreatePage = () => {
     control,
     getValues,
   } = useForm();
-  console.log("errors", errors);
 
   const onSubmit = (data: any) => {
     const { capacity, price, time, startAt, ...requestData } = data;
@@ -74,7 +64,6 @@ export const SocialCreatePage = () => {
   };
 
   const dateCreated = getValues();
-  console.log("dateCreated", dateCreated);
 
   return (
     <>
