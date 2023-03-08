@@ -1,13 +1,7 @@
 import { SOCIAL_FIELDS } from "../../constants";
 
 import s from "./VenueCapacityPriceField.module.scss";
-import {
-  Control,
-  Controller,
-  FieldErrors,
-  FieldValues,
-  UseFormRegister,
-} from "react-hook-form";
+import { Control, Controller, FieldErrors, FieldValues } from "react-hook-form";
 import { pluralize } from "../../../../helpers/pluralize";
 import { InputText } from "../../../../components/editor/InputText/InputText";
 import UserGroupIcon from "@heroicons/react/24/solid/UserGroupIcon";
@@ -16,14 +10,15 @@ import classNames from "classnames";
 import MapPinIcon from "@heroicons/react/24/solid/MapPinIcon";
 
 interface VenueCapacityPriceFieldProps {
-  register: UseFormRegister<FieldValues>;
   control: Control<FieldValues, any>;
   errors: FieldErrors<FieldValues>;
   showDetail?: boolean;
 }
 
-export default function VenueCapacityPriceField(props: VenueCapacityPriceFieldProps) {
-  const { register, control, errors, showDetail = false } = props;
+export default function VenueCapacityPriceField(
+  props: VenueCapacityPriceFieldProps
+) {
+  const { control, errors, showDetail = false } = props;
 
   return (
     <div className={s.frameDiv}>
@@ -33,9 +28,10 @@ export default function VenueCapacityPriceField(props: VenueCapacityPriceFieldPr
         </div>
         <div className={s.imageWrapper}>
           <Controller
-            {...register(SOCIAL_FIELDS.VENUE, {
+            name={SOCIAL_FIELDS.VENUE}
+            rules={{
               required: "Venue is required",
-            })}
+            }}
             control={control}
             render={({ field }) => (
               <InputText
@@ -54,11 +50,11 @@ export default function VenueCapacityPriceField(props: VenueCapacityPriceFieldPr
         <div className={s.mediaIconfilleduserGroupParent}>
           <UserGroupIcon className={classNames("h-6 w-6", s.iconForm)} />
           <Controller
-            {...register(SOCIAL_FIELDS.CAPACITY, {
+            name={SOCIAL_FIELDS.CAPACITY}
+            rules={{
               required: "Capacity is required",
-              valueAsNumber: true,
               validate: (value) => value > 0 || "Not a Number",
-            })}
+            }}
             control={control}
             render={({ field }) => (
               <InputText
@@ -83,10 +79,10 @@ export default function VenueCapacityPriceField(props: VenueCapacityPriceFieldPr
           <CurrencyDollarIcon className={classNames("h-6 w-6", s.iconForm)} />
 
           <Controller
-            {...register(SOCIAL_FIELDS.PRICE, {
+            name={SOCIAL_FIELDS.PRICE}
+            rules={{
               validate: (value) => value > 0 || "Not a Number",
-              valueAsNumber: true,
-            })}
+            }}
             control={control}
             render={({ field }) => (
               <InputText

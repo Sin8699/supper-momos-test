@@ -15,14 +15,13 @@ import { InputDateTime } from "../../../../components/editor/InputDateTime/Input
 import { InputTime } from "../../../../components/editor/InputDateTime/InputTime";
 
 interface DateTimeFieldProps {
-  register: UseFormRegister<FieldValues>;
   control: Control<FieldValues, any>;
   errors: FieldErrors<FieldValues>;
   showDetail?: boolean;
 }
 
 export default function DateTimeField(props: DateTimeFieldProps) {
-  const { register, control, errors, showDetail = false } = props;
+  const { control, errors, showDetail = false } = props;
 
   return (
     <div className={s.frameGroup}>
@@ -30,15 +29,13 @@ export default function DateTimeField(props: DateTimeFieldProps) {
         <CalendarIcon className={classNames("h-12 w-12", s.iconForm)} />
 
         <Controller
-          {...register(SOCIAL_FIELDS.DATE_START_AT, {
-            required: "Date is required",
-          })}
+          name={SOCIAL_FIELDS.DATE_START_AT}
+          rules={{ required: "Date is required" }}
           control={control}
           render={({ field }) => (
             <InputDateTime
               className={classNames("w-[181px]", s.headingContainer)}
               defaultText="Date"
-              // name={SOCIAL_FIELDS.DATE_START_AT}
               errors={errors?.[SOCIAL_FIELDS.DATE_START_AT]?.message as string}
               onChange={field.onChange}
               onlyView={showDetail}
@@ -50,9 +47,8 @@ export default function DateTimeField(props: DateTimeFieldProps) {
         <ClockIcon className={classNames("h-12 w-12", s.iconForm)} />
 
         <Controller
-          {...register(SOCIAL_FIELDS.TIME_START_AT, {
-            required: "Time is required",
-          })}
+          name={SOCIAL_FIELDS.TIME_START_AT}
+          rules={{ required:"Time is required" }}
           control={control}
           render={({ field }) => (
             <InputTime

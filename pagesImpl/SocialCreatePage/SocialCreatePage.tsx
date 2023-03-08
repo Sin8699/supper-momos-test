@@ -59,7 +59,6 @@ export const SocialCreatePage = () => {
       .set("minute", m)
       .set("second", s);
 
-
     createSocial({
       ...requestData,
       startAt: dateTime.toISOString(),
@@ -115,9 +114,10 @@ export const SocialCreatePage = () => {
                             )}
                           >
                             <Controller
-                              {...register(SOCIAL_FIELDS.TITLE, {
+                              name={SOCIAL_FIELDS.TITLE}
+                              rules={{
                                 required: "Title is required",
-                              })}
+                              }}
                               control={control}
                               render={({ field }) => (
                                 <div className={styles.frameWrapper}>
@@ -152,21 +152,18 @@ export const SocialCreatePage = () => {
                             <DateTimeField
                               control={control}
                               errors={errors}
-                              register={register}
                               showDetail={showDetail}
                             />
 
                             <VenueCapacityPriceField
                               control={control}
                               errors={errors}
-                              register={register}
                               showDetail={showDetail}
                             />
                           </div>
                           <DescriptionField
                             control={control}
                             errors={errors}
-                            register={register}
                             showDetail={showDetail}
                           />
                           {!showDetail && (
@@ -196,9 +193,10 @@ export const SocialCreatePage = () => {
       </div>
 
       <Controller
-        {...register(SOCIAL_FIELDS.BANNER, {
+        name={SOCIAL_FIELDS.BANNER}
+        rules={{
           required: "Banner is required",
-        })}
+        }}
         control={control}
         render={({ field }) => (
           <UploadBannerModal

@@ -15,7 +15,7 @@ import PickTagSocial from "../PickTagSocial/PickTagSocial";
 interface SettingBlockProps {
   register: UseFormRegister<FieldValues>;
   control: Control<FieldValues, any>;
-  errors: FieldErrors<FieldValues>
+  errors: FieldErrors<FieldValues>;
 }
 
 export default function SettingBlock(props: SettingBlockProps) {
@@ -147,9 +147,10 @@ export default function SettingBlock(props: SettingBlockProps) {
               </div>
             </div>
             <Controller
-              {...register(SOCIAL_FIELDS.TAGS, {
+              name={SOCIAL_FIELDS.TAGS}
+              rules={{
                 required: "Tags is required",
-              })}
+              }}
               control={control}
               render={({ field }) => (
                 <PickTagSocial
