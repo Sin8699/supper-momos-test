@@ -48,17 +48,17 @@ export const SocialCreatePage = () => {
   console.log("errors", errors);
 
   const onSubmit = (data: any) => {
-    const { time, startAt: startDate } = data;
+    const { capacity, price, time, startAt, ...requestData } = data;
+
     const h = dayjs(time).hour();
     const m = dayjs(time).minute();
     const s = dayjs(time).second();
 
-    const dateTime = dayjs(startDate)
+    const dateTime = dayjs(startAt)
       .set("hour", h)
       .set("minute", m)
       .set("second", s);
 
-    const { capacity, price, ...requestData } = data;
 
     createSocial({
       ...requestData,
